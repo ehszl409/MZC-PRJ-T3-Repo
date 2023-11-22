@@ -9,18 +9,19 @@ phases:
 
       - sudo wget https://sqlite.org/2021/sqlite-autoconf-3360000.tar.gz
       - sudo tar -zxf sqlite-autoconf-3360000.tar.gz
-      - cd sqlite-autoconf-3360000/
+      - cd sqlite-autoconf-3360000/ # src/sqlite-autoconf-3360000/
       - sudo yum install gcc -y
       - sudo ./configure
       - sudo make clean && sudo make -j 20 && sudo make install
+      - cd .. # src/
       - sqlite3 --version
 
       - python3 -c "import sqlite3; print(sqlite3.sqlite_version)"
       - export LD_LIBRARY_PATH="/usr/local/lib"
       - python3 -c "import sqlite3; print(sqlite3.sqlite_version)"
 
-      - pwd
-      - cd ../django-ecommerce/
+      - pwd # src/
+      - cd django-ecommerce/ # src/django-ecommerce/
       - python3 -m venv venv
       - source venv/bin/activate
       - pip install -r requirements.txt
@@ -28,20 +29,19 @@ phases:
 
   build:
     commands:
-      - pwd
+      - pwd # src/django-ecommerce/
       - python manage.py test
       - echo "Build complete"
-      
+
   post_build:
     commands:
       - echo "post_Build start"
       - rm -rf static/
       - rm -rf venv/
-      - cd ..
+      - cd .. # src/
       - tar -czvf django-ecommerce.tar.gz src/
 
-      
 artifacts:
-  files: 
+  files:
     - ../django-ecommerce.tar.gz
   discard-paths: yes
