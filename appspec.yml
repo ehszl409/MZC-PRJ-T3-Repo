@@ -14,10 +14,10 @@ hooks:
   #   - location: scripts/change_permissions.sh
   #     timeout: 300
   #     runas: root
-  # ApplicationStart:
-  #   - location: scripts/removefile.sh
-  #     timeout: 300
-  #     runas: root
+  ApplicationStart:
+    - location: scripts/removefile.sh
+      timeout: 300
+      runas: root
   # ApplicationStop:
   #   - location: scripts/removefile.sh
   #     timeout: 300
