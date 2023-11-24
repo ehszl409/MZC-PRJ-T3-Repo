@@ -52,7 +52,7 @@ def get_parameter(parameter_name):
 db_dbname = get_parameter("dbname")
 db_user = get_parameter("user")
 db_password = get_parameter("password")
-db_prd_endpoint = get_parameter("prd-endpoint")
+db_endpoint = get_parameter("endpoint")
 db_port = get_parameter("port")
 
 
@@ -119,7 +119,7 @@ DATABASES = {
         "NAME": db_dbname,
         "USER": db_user,
         "PASSWORD": db_password,
-        "HOST": db_prd_endpoint,
+        "HOST": db_endpoint,
         "PORT": db_port,
         "TEST": {
             "NAME": "mytestdatabase",
