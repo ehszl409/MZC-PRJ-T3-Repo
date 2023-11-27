@@ -7,9 +7,20 @@ phases:
       - sudo amazon-linux-extras install epel -y
       - sudo yum -y install mysql-community-server
 
-      # SQLite 빌드를 최적화하기 위한 작업 추가
+      - sudo wget https://sqlite.org/2021/sqlite-autoconf-3360000.tar.gz
+      - sudo tar -zxf sqlite-autoconf-3360000.tar.gz
+      - cd sqlite-autoconf-3360000/ # src/sqlite-autoconf-3360000/
       - sudo yum install gcc -y
-      - sudo yum install sqlite-devel -y
+      - sudo ./configure
+      - sudo make clean && sudo make -j 20 && sudo make install
+      - cd .. # src/
+      - sqlite3 --version
+
+      - python3 -c "import sqlite3; print(sqlite3.sqlite_version)"
+      - export LD_LIBRARY_PATH="/usr/local/lib"
+      - python3 -c "import sqlite3; print(sqlite3.sqlite_version)"
+
+      - pwd # src/
       - python3 -m venv venv
       - source venv/bin/activate
       - pip install -r requirements.txt
@@ -17,18 +28,23 @@ phases:
 
   build:
     commands:
+      - pwd # src/
+      - python3 -m venv venv
+      - source venv/bin/activate
+      - venv/bin/python3 -m pip install --upgrade pip
+      - pip install -r requirements.txt
       - python manage.py test
       - echo "Build complete"
 
   post_build:
     commands:
       - echo "post_Build start"
-      # 불필요한 파일 제거를 최적화
-      - rm -rf static/ venv/
+      - rm -rf static/
+      - rm -rf venv/
+      - cd .. # /
       - tar -czvf django-ecommerce.tar.gz src/
-      - echo "post_build complete"
 
 artifacts:
   files:
-    - django-ecommerce.tar.gz
+    - ../django-ecommerce.tar.gz
   discard-paths: yes
