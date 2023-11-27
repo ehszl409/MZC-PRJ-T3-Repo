@@ -122,7 +122,10 @@ DATABASES = {
         "HOST": db_prd_endpoint,
         "PORT": db_port,
         "TEST": {
-            "NAME": "mytestdatabase",  # 추가
+            "NAME": "mytestdatabase",
+        },
+        "OPTIONS": {
+            "init_command": "SET sql_mode='STRICT_TRANS_TABLES'",
         },
     },
     "sqlite": {
