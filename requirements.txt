@@ -1,9 +1,9 @@
 asgiref==3.3.0
 boto3==1.28.78
 botocore==1.31.78
-Django==3.1.14
 gevent==23.9.1
 greenlet==3.0.1
+Django==3.1.14
 django-ckeditor==5.8.0
 django-js-asset==1.2.2
 gunicorn==21.2.0
