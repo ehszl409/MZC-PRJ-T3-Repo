@@ -3,7 +3,7 @@
 # 파일이 위치한 디렉토리로 이동합니다.
 cd /var/www/html
 
-# 'static' 폴더를 제외한 모든 파일과 디렉토리를 삭제합니다.
+# 'static' 폴더를 제외한 모든 파일과 디렉토리를 삭제합니다..
 shopt -s extglob
 sudo rm -rf !(static)
 
